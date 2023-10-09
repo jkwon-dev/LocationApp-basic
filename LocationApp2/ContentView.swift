@@ -6,14 +6,18 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ContentView: View {
+    @ObservedObject private var locationManger = LocationManager()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        
+        let coordinate = self.locationManger.location != nil ? self.locationManger.location?.coordinate : CLLocationCoordinate2D()
+        
+       
+        return VStack {
+            Text("latitude: \(coordinate!.latitude), longitude: \(coordinate!.longitude)")
         }
         .padding()
     }
